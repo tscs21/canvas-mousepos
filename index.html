@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        :root{
+            background-color: lightgray;
+           /*background-image: url(dog.jpg);*/
+           background-repeat: no-repeat;
+
+
+
+            font-size:12px;
+        }
+        ::selection{
+            background-color: aqua;
+        }
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        #myCanvas {
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, #ffffff 40%, #ffffff 60%, rgba(255, 255, 255, 0) 60%), linear-gradient(90deg, rgba(255, 255, 255, 0) 40%, #ffffff 40%, #ffffff 60%, rgba(255, 255, 255, 0) 60%), linear-gradient(45deg, rgba(255, 255, 255, 0) 43%, #ffffff 43%, #ffffff 57%, rgba(255, 255, 255, 0) 57%), linear-gradient(135deg, rgba(255, 255, 255, 0) 43%, #ffffff 43%, #ffffff 57%, rgba(255, 255, 255, 0) 57%);
+            border-radius: 150px;
+        }
+        #myCanvas:hover{
+            transform: translate(100px, 100px) rotate(20deg);
+        }
+        </style>
+</head>
+<body>
+<canvas id="myCanvas" width="200" height="200" style="border: 1px solid black; margin: 100px"></canvas>
+<div style="font-size: 3rem">hello</div>
+<script>
+    function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '9pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 20, 100);
+    }
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+
+    canvas.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+    }, false);
+</script>
+</body>
+</html>
